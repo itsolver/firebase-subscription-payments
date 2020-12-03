@@ -8,7 +8,7 @@ const taxRates = ['txr_0Eh78mGwvziWDQiz631U8Uzk'];
 
 // Replace with your Firebase project config.
 const firebaseConfig = {
-  apiKey: "AIzaSyBch2COt3wDfrsgUJzTFyaCEQKKmFJRPiw",
+  apiKey: "{INSERTAPIKEY}",
   authDomain: "bddsubs.firebaseapp.com",
   projectId: "bddsubs",
   storageBucket: "bddsubs.appspot.com",
