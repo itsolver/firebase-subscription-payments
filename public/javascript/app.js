@@ -1,24 +1,24 @@
 // Replace with your publishable key
 // https://dashboard.stripe.com/apikeys
-const STRIPE_PUBLISHABLE_KEY = 'pk_test_NzVWw6MB7fN3HSeAvVnyf5tx00hTu3Ukrk';
+const STRIPE_PUBLISHABLE_KEY = 'pk_test_SG9X9fY1ESQ5MUd58bxByEVA';
 
 // Replace with your tax ids
 // https://dashboard.stripe.com/tax-rates
-const taxRates = ['txr_1HCshzHYgolSBA35WkPjzOOi'];
+const taxRates = ['txr_0Eh78mGwvziWDQiz631U8Uzk'];
 
 // Replace with your Firebase project config.
 const firebaseConfig = {
-  apiKey: 'AIzaSyAEGmffBNUsVrdVS_iyiI4eUMOWWp4Q5dI',
-  authDomain: 'stripe-subs-ext.firebaseapp.com',
-  databaseURL: 'https://stripe-subs-ext.firebaseio.com',
-  projectId: 'stripe-subs-ext',
-  storageBucket: 'stripe-subs-ext.appspot.com',
-  messagingSenderId: '955066520266',
-  appId: '1:955066520266:web:ec7135a76fea7a1bce9a33',
-};
+  apiKey: "AIzaSyBch2COt3wDfrsgUJzTFyaCEQKKmFJRPiw",
+  authDomain: "bddsubs.firebaseapp.com",
+  projectId: "bddsubs",
+  storageBucket: "bddsubs.appspot.com",
+  messagingSenderId: "815914330727",
+  appId: "1:815914330727:web:33d36027b8cd7dda7a82c2",
+  measurementId: "G-8M0JMRMYYP"
+}
 
 // Replace with your cloud functions location
-const functionLocation = 'us-east1';
+const functionLocation = 'australia-southeast1';
 
 // Initialize Firebase
 const firebaseApp = firebase.initializeApp(firebaseConfig);
