@@ -1,10 +1,10 @@
 // Replace with your publishable key
 // https://dashboard.stripe.com/apikeys
-const STRIPE_PUBLISHABLE_KEY = 'pk_test_SG9X9fY1ESQ5MUd58bxByEVA';
+const STRIPE_PUBLISHABLE_KEY = 'pk_test_51ISccSIRnn4YZ0EropUgPfqFEVORKxyRxGo4v2zirJjH1x1K8gm8KYPaXmMwoYkjNyjTXzjLPpOi80nzrWmhjF1H004yTX5sAu';
 
 // Replace with your tax ids
 // https://dashboard.stripe.com/tax-rates
-const taxRates = ['txr_0Eh78mGwvziWDQiz631U8Uzk'];
+const taxRates = ['txr_1ITRDkIRnn4YZ0Er8RPayd04'];
 
 // Replace with your Firebase project config.
 const firebaseConfig = {
