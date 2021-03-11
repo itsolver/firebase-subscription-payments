@@ -8,13 +8,13 @@ const taxRates = ['txr_1ITRDkIRnn4YZ0Er8RPayd04'];
 
 // Replace with your Firebase project config.
 const firebaseConfig = {
-  apiKey: "{INSERTAPIKEY}",
+  apiKey: "AIzaSyBch2COt3wDfrsgUJzTFyaCEQKKmFJRPiw",
   authDomain: "bddsubs.firebaseapp.com",
   projectId: "bddsubs",
   storageBucket: "bddsubs.appspot.com",
   messagingSenderId: "815914330727",
-  appId: "1:815914330727:web:33d36027b8cd7dda7a82c2",
-  measurementId: "G-8M0JMRMYYP"
+  appId: "1:815914330727:web:a03aba42474114d87a82c2",
+  measurementId: "G-9J2YKN8467"
 }
 
 // Replace with your cloud functions location
