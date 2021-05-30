@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bonney Douglas Design Subscriptions Demo</title>
+    <title>Bonney Douglas Design</title>
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
     <header>
-      <a href="/" rel="home">Bonney Douglas Design Subscriptions Demo</a>
+      <a href="/" rel="home">Bonney Douglas Design</a>
     </header>
 
     <section id="firebaseui-auth-container">
@@ -35,24 +35,31 @@
         </div>
         <section class="products"></section>
       </div>
+      <section id="my-request">
+          
+      </section>
       <section id="my-subscription">
         <h2>My subscription</h2>
         <p></p>
+        <span></span>
+        <h3>Submit a Request</h3>
+          <h4 id="brand_identity">Brand Identity</h4>
+          <form class="task-form" action="addTask/">
+            <input type="hidden" id="customer" name="customer" value=""></input>
+            <input type="hidden" id="subscription" name="subscription" value=""></input>
+            <label for="task">Choose task</label>
+            <select id="task" name="task">
+              <option value="task_ASOmIrUB5YkQvAxNabkS">Style Guidelines</option>
+            </select>
+
+            <button type="submit">Submit request</button>
+          </form>
         <h3>View invoices, update subscription & payment methods</h3>
         <button id="billing-portal-button">Access customer portal</button>
       </section>
     </main>
 
     <footer>
-      <p>
-        Made with ❤️ and ☕️ by Stripe & Firebase | View
-        <a
-          href="https://github.com/stripe-samples/firebase-subscription-payments"
-          target="_blank"
-          rel="noopener noreferrer"
-          >source</a
-        >
-      </p>
     </footer>
 
     <template id="product">

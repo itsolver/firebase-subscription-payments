@@ -48,7 +48,7 @@ const firebaseUiConfig = {
   ],
   credentialHelper: firebaseui.auth.CredentialHelper.NONE,
   // Your terms of service url.
-  tosUrl: 'https://example.com/terms',
+  tosUrl: 'terms',
   // Your privacy policy url.
   privacyPolicyUrl: 'https://example.com/privacy',
 };
@@ -57,7 +57,13 @@ firebase.auth().onAuthStateChanged((firebaseUser) => {
     document.querySelector('#loader').style.display = 'none';
     document.querySelector('main').style.display = 'block';
     currentUser = firebaseUser.uid;
-    startDataListeners();
+    let params = new URLSearchParams(document.location.search.substring(1));
+    let price = params.get("price"); // is the string "Jonathan"
+    if (price !== null) {
+      quickSubscribe(price);
+    } else {
+      startDataListeners();
+    }
   } else {
     document.querySelector('main').style.display = 'none';
     firebaseUI.start('#firebaseui-auth-container', firebaseUiConfig);
@@ -134,17 +140,24 @@ function startDataListeners() {
       }
       document.querySelector('#subscribe').style.display = 'none';
       document.querySelector('#my-subscription').style.display = 'block';
+      
       // In this implementation we only expect one Subscription to exist
       const subscription = snapshot.docs[0].data();
       const priceData = (await subscription.price.get()).data();
+      const productData = (await subscription.product.get()).data();
+      let tasksTotal = priceData.transform_quantity.divide_by;
+      let creditUsage = (await subscription.metadata.credit_usage);
+      document.querySelector('#customer').value = currentUser;
+      document.querySelector('#subscription').value = subscription.items[0].subscription;
+      document.querySelector(
+        '#my-subscription h2'
+        ).textContent = `${productData.name}`
       document.querySelector(
         '#my-subscription p'
-      ).textContent = `You are paying ${new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: priceData.currency,
-      }).format((priceData.unit_amount / 100).toFixed(2))} per ${
-        priceData.interval
-      }, giving you the role: ${await getCustomClaimRole()}. 🥳`;
+      ).textContent = `Marketing Tasks: ${ creditUsage } / ${ tasksTotal }`;
+      document.querySelector(
+        '#my-subscription span'
+      ).textContent = `Unused tasks rollover each month`
     });
 }
 
@@ -175,6 +188,7 @@ async function subscribe(event) {
       cancel_url: window.location.origin,
       metadata: {
         tax_rate: '10% sales tax exclusive',
+        current_usage: '0',
       },
     });
   // Wait for the CheckoutSession to get attached by the extension
@@ -215,3 +229,41 @@ async function getCustomClaimRole() {
   const decodedToken = await firebase.auth().currentUser.getIdTokenResult();
   return decodedToken.claims.stripeRole;
 }
+
+// Quick Checkout handler
+async function quickSubscribe(price) {
+
+  const docRef = await db
+    .collection('customers')
+    .doc(currentUser)
+    .collection('checkout_sessions')
+    .add({
+      price: price,
+      allow_promotion_codes: true,
+      tax_rates: taxRates,
+      success_url: window.location.origin,
+      cancel_url: window.location.origin,
+      metadata: {
+        tax_rate: '10% sales tax exclusive',
+        current_usage: '0',
+      },
+    });
+  // Wait for the CheckoutSession to get attached by the extension
+  docRef.onSnapshot((snap) => {
+    const { error, sessionId } = snap.data();
+    if (error) {
+      // Show an error to your customer and then inspect your function logs.
+      alert(`An error occured: ${error.message}`);
+      document.querySelectorAll('button').forEach((b) => (b.disabled = false));
+    }
+    if (sessionId) {
+      // We have a session, let's redirect to Checkout
+      // Init Stripe
+      const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+      stripe.redirectToCheckout({ sessionId });
+    }
+  });
+}
+
+// Display tasks options in request form, disabling items with credits > tasksTotal. 
+// Server-side (Functions) check if task.credits < tasksTotal.

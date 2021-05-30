@@ -4,7 +4,7 @@
   "description": "Demo application for the firestore-stripe-subscriptions extension.",
   "main": "/public/index.html",
   "scripts": {
-    "dev": "firebase serve",
+    "dev": "firebase emulators:start --inspect-functions",
     "deploy": "firebase deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -22,8 +22,11 @@ service cloud.firestore {
       match /checkout_sessions/{id} {
         allow read, write: if request.auth.uid == uid;
       }
-      match /subscriptions/{id} {
+      match /subscriptions/{doc} {
         allow read: if request.auth.uid == uid;
+        match /tasks/{doc} {
+        allow read, write: if request.auth.uid == uid;
+      }
       }
     }
 
@@ -33,6 +36,10 @@ service cloud.firestore {
       match /prices/{id} {
         allow read: if true;
       }
+    }
+    match /tasks/{task} {
+      // Allow authenticated users to read the tasks collection
+      allow read: if request.auth != null;
     }
   }
 }
