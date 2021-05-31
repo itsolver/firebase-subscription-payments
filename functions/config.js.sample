@@ -1,0 +1,6 @@
+export default {
+    stripeSecretKey: process.env.STRIPESECRETKEY,
+    stripeWebhookSecret: process.env.STRIPEWEBHOOKSECRET,
+    productsCollectionPath: process.env.PRODUCTS_COLLECTION,
+    customersCollectionPath: process.env.CUSTOMERS_COLLECTION,
+  };
